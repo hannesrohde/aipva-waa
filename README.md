@@ -14,7 +14,7 @@ an ein LLM sendet und die Antwort wiederum als Sprache ausgibt.
 Das Projekt verwendet Poetry zur Python-Paketverwaltung.
 
 ````
-poetry init
+poetry install
 poetry run python src/main.py
 ````
 
