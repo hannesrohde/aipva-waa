@@ -9,6 +9,11 @@ AI-powered voice assistant ... with an attitude!
 Realisiert wird ein Voice Chatbot, der Eingaben per Sprache annimmt, als Prompt
 an ein LLM sendet und die Antwort wiederum als Sprache ausgibt.
 
+Team:
+- Hannes Rohde <h.rohde@qvest-digital.com>
+- Matthias Rüster <m.ruester@qvest-digital.com>
+- Thomas Hensel <t.hensel@qvest-digital.com>
+
 ## Installation
 
 Das Projekt verwendet Poetry zur Python-Paketverwaltung, das auf dem System installiert sein muss.
