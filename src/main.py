@@ -19,8 +19,6 @@ def main():
     audio_output_file = 'audio/input.wav'
     record_audio(audio_output_file)
 
-
-
     # os.environ['GOOGLE_APPLICATION_CREDENTIALS']= 'google_secret_key.json'
     # client = speech.SpeechClient()
     #

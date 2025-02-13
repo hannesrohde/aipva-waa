@@ -12,19 +12,6 @@ def list_audio_devices():
         print(f"Device {i}: {info['name']}")
     p.terminate()
 
-space_pressed = False
-
-def on_press(key):
-    global space_pressed
-    if key == keyboard.Key.space:
-        space_pressed = True
-
-def on_release(key):
-    global space_pressed
-    if key == keyboard.Key.space:
-        space_pressed = False
-        return False # stop listener
-
 def record_audio(output_file):
     """
     Records audio from the default input device until the space bar is released.
@@ -57,7 +44,7 @@ def record_audio(output_file):
         else:
             break
 
-    print('Recording stopped')
+    print('Aufnahme beendet')
     stream.stop_stream()
     stream.close()
 
