@@ -1,7 +1,8 @@
 # aipva-waa
 AI-powered voice assistant ... with an attitude!
 
-![Hallo](./mysterious-machine.png)
+![aipva](./mysterious-machine.png)
+*Bild generiert mit Dall-E*
 
 ## Ein Spaß-Projekt für den Workshop der Github Copilot-Schulung
 
