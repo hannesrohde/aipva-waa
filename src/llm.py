@@ -35,6 +35,7 @@ def stream_chat_completion(messages, model="chatgpt-4o-latest"):
     )
 
     if response.status_code != 200:
+        # TODO: Fehler als Sprache zurückliefern
         raise Exception(f"Error: {response.status_code}")
 
     # Process the streaming response

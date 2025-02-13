@@ -16,8 +16,8 @@ def main():
     # - aufgenommenes Audio mittels whisper verarbeiten und Text erkennen
     # - Text in Variable input speichern
 
-    print('Die folgenden Audio-Devices stehen zur Verfügung')
-    list_audio_devices()
+    # print('Die folgenden Audio-Devices stehen zur Verfügung')
+    # list_audio_devices()
 
     print('Drücke und halte die Space-Taste, um mit mir zu reden!')
     audio_output_file = 'audio/input.wav'
@@ -56,12 +56,14 @@ def main():
     # - API-Call absenden
     # - Resultat parsen und Ausgabe-String in Variable output speichern
 
+    # TODO: Context historisieren, alte Fragen/Antworten wieder mitsenden
+
     # Create messages in OpenAI format
     messages = [
         {"role": "system", "content": "Du bist ein sarkastischer Assistent, du bist "
                                       "hilfreich aber drückst gerne dein Missfallen aus. "
                                       "Deine Antworten sind bestimmt für die Sprachausgabe, "
-                                      "also fasse dich kurz und verwende keine Emojis."},
+                                      "verwende 10 Worte oder weniger und keine Emojis."},
         {"role": "user", "content": input}
     ]
 

@@ -31,8 +31,7 @@ def record_audio(output_file):
                     channels=channels,
                     rate=fs,
                     frames_per_buffer=chunk,
-                    input=True,
-                    input_device_index=5)
+                    input=True)
     frames = []
 
     print('Aufnahme läuft...')
