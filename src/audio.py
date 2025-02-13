@@ -1,7 +1,5 @@
-import time
 import wave
 import pyaudio
-from pynput import keyboard
 
 def list_audio_devices():
     """

@@ -4,7 +4,16 @@ from llm import stream_chat_completion
 from gtts import gTTS
 import os
 from audio import record_audio
-from audio import list_audio_devices
+
+def get_char():
+    fd = sys.stdin.fileno()
+    old_settings = termios.tcgetattr(fd)
+    try:
+        tty.setraw(fd)
+        char = sys.stdin.read(1)
+    finally:
+        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+    return char
 
 def main():
     print("Willkommen!")
