@@ -1,5 +1,4 @@
 import io
-import os
 import sys
 from google.cloud import speech
 from llm import stream_chat_completion
