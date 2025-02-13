@@ -51,17 +51,14 @@ def main():
         {"role": "user", "content": input}
     ]
 
-    try:
-        print("Assistant's Response:")
-        # Stream the response
-        for content_chunk in stream_chat_completion(messages):
-            print(content_chunk, end='', flush=True)
-        print("")
+    print("Querying API")
 
-    except Exception as e:
-        print(f"Error: {str(e)}")
+    # query api and convert response to string
+    output = ''.join([content_chunk for content_chunk in stream_chat_completion(messages)])
+    # output = 'Danke dass du fragst! Mir geht es heute super!'
 
-    output = 'Danke dass du fragst! Mir geht es heute super!'
+    print("Assistant's Response:")
+    print(output)
 
     # ----------------------------------------------------------
 
