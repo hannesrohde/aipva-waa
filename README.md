@@ -11,7 +11,7 @@ an ein LLM sendet und die Antwort wiederum als Sprache ausgibt.
 
 ## Installation
 
-Das Projekt verwendet Poetry zur Python-Paketverwaltung.
+Das Projekt verwendet Poetry zur Python-Paketverwaltung, das auf dem System installiert sein muss.
 
 ```shell
 poetry install
@@ -20,7 +20,9 @@ poetry run python src/main.py
 
 ## Umgebung
 
-Folgende Umgebungsvariablen braucht das Programm:
+Das Programm benötigt API-Keys von [NanoGPT](https://nano-gpt.com/api) und Google Cloud:
+
+Der API-Key für NanoGPT wird als Umgebungsvariable gesetzt:
 
 ```shell
 export NANOGPT_API_KEY=abcd-efg-hij
@@ -32,18 +34,16 @@ Die Google API Secret Key Datei für Speech-To-Text muss unter `config/google_se
 ## Details
 
 - "Push-to-talk": die Benutzer:Innen halten eine Taste gedrückt, während sie in das Mikrophon des Rechners sprechen
-- Speech-to-text: "whisper"?
 - Prompt generieren
   - kurze und knackige Antworten für die Sprachausgabe
   - interessanter "Charakter" des Chatbots
 - LLM-Request via nano-gpt.com, OpenAI-kompatibles API
   - https://nano-gpt.com/api
   - https://platform.openai.com/docs/guides/text-generation
-- text-to-speech: Mimic3
-  - https://community.openconversational.ai/t/how-to-use-mimic3-directly-from-python-code/12778
 
 ## Technologien
 - Python
 - OpenAI API
-- [Whisper](https://github.com/openai/whisper)
-- [Mimic3](https://community.openconversational.ai/t/introducing-mimic-3/12256) 
+- Google Cloud Speech-to-Text, Text-to-Speech
+- TODO: lokal [Whisper](https://github.com/openai/whisper)
+- TODO: lokal [Mimic3](https://community.openconversational.ai/t/introducing-mimic-3/12256) 
