@@ -11,6 +11,12 @@ def main():
     # - aufgenommenes Audio mittels whisper verarbeiten und Text erkennen
     # - Text in Variable input speichern
 
+    print('Drücke und halte die Space-Taste, um mit mir zu reden!')
+    audio_output_file = 'audio/input.wav'
+    record_audio(audio_output_file)
+
+
+
     # os.environ['GOOGLE_APPLICATION_CREDENTIALS']= 'google_secret_key.json'
     # client = speech.SpeechClient()
     #
