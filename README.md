@@ -13,12 +13,20 @@ an ein LLM sendet und die Antwort wiederum als Sprache ausgibt.
 
 Das Projekt verwendet Poetry zur Python-Paketverwaltung.
 
-````
+```shell
 poetry install
 poetry run python src/main.py
-````
+```
 
+## Umgebung
 
+Folgende Umgebungsvariablen braucht das Programm:
+
+```shell
+export NANOGPT_API_KEY=abcd-efg-hij
+```
+
+Die Google API Secret Key Datei für Speech-To-Text muss unter `config/google_secret_key.json` abgespeichert sein.
 
 
 ## Details

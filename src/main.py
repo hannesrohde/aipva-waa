@@ -1,5 +1,4 @@
 import io
-import sys
 from google.cloud import speech
 from llm import stream_chat_completion
 from gtts import gTTS
@@ -7,9 +6,8 @@ import os
 from audio import record_audio
 from audio import list_audio_devices
 
-
 def main():
-    print("Welcome!")
+    print("Willkommen!")
 
     # Part 1: speech-to-text
     # - "push to talk" : Aufnahme während Leertaste gedrückt ist
@@ -19,33 +17,40 @@ def main():
     # print('Die folgenden Audio-Devices stehen zur Verfügung')
     # list_audio_devices()
 
-    print('Drücke und halte die Space-Taste, um mit mir zu reden!')
     audio_output_file = 'audio/input.wav'
     record_audio(audio_output_file)
 
-    # os.environ['GOOGLE_APPLICATION_CREDENTIALS']= 'google_secret_key.json'
-    # client = speech.SpeechClient()
-    #
-    # audiofile = os.path.join('..', 'audio', 'wie geht es dir.wav')
-    #
-    # with io.open(audiofile, "rb") as audio_file:
-    #     content = audio_file.read()
-    #     audio = speech.RecognitionAudio(content=content)
-    #
-    # config = speech.RecognitionConfig(
-    #     encoding=speech.RecognitionConfig.AudioEncoding.LINEAR16,
-    #     enable_automatic_punctuation=True,
-    #     audio_channel_count=2,
-    #     language_code="de-DE",
-    # )
-    #
-    # # Sends the request to google to transcribe the audio
-    # response = client.recognize(request={"config": config, "audio": audio})
-    # # Reads the response
-    # for result in response.results:
-    #     print("Transcript: {}".format(result.alternatives[0].transcript))
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'config/google_secret_key.json'
+    client = speech.SpeechClient()
 
-    input = 'Hallo Maschine, wie geht es dir?'
+    with io.open(audio_output_file, "rb") as audio_file:
+        content = audio_file.read()
+        audio = speech.RecognitionAudio(content=content)
+
+    config = speech.RecognitionConfig(
+        encoding=speech.RecognitionConfig.AudioEncoding.LINEAR16,
+        enable_automatic_punctuation=True,
+        audio_channel_count=2,
+        language_code="de-DE",
+    )
+
+    print("Ich verarbeite das Gehörte")
+
+    # Sends the request to google to transcribe the audio
+    response = client.recognize(request={"config": config, "audio": audio})
+
+    if len(response.results) > 0:
+        result = ' '.join([res.alternatives[0].transcript for res in response.results])
+    else:
+        tts = gTTS("Ich habe dich nicht verstanden", lang="de")
+        tts.save('audio/output.mp3')
+        os.system('sox -q audio/output.mp3 -d')
+        return
+
+    print("Ich habe verstanden: {}".format(result))
+
+    #input = 'Hallo Maschine, wie geht es dir?'
+    input = result
 
     # ----------------------------------------------------------
 
@@ -73,7 +78,7 @@ def main():
     output = ''.join([content_chunk for content_chunk in stream_chat_completion(messages)])
     # output = 'Danke dass du fragst! Mir geht es heute super!'
 
-    print("Assistant's Response:")
+    print("Antwort von KI:")
     print(output)
 
     # ----------------------------------------------------------
@@ -86,7 +91,7 @@ def main():
     tts = gTTS(output, lang="de")
     tts.save('audio/output.mp3')
 
-    os.system('sox audio/output.mp3 -d')
+    os.system('sox -q audio/output.mp3 -d')
 
 if __name__ == "__main__":
     main()
