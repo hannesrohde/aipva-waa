@@ -9,6 +9,18 @@ AI-powered voice assistant ... with an attitude!
 Realisiert wird ein Voice Chatbot, der Eingaben per Sprache annimmt, als Prompt
 an ein LLM sendet und die Antwort wiederum als Sprache ausgibt.
 
+## Installation
+
+Das Projekt verwendet Poetry zur Python-Paketverwaltung.
+
+````
+poetry init
+poetry run python src/main.py
+````
+
+
+
+
 ## Details
 
 - "Push-to-talk": die Benutzer:Innen halten eine Taste gedrückt, während sie in das Mikrophon des Rechners sprechen
