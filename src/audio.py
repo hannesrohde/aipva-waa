@@ -1,3 +1,4 @@
+import time
 import wave
 import pyaudio
 from pynput import keyboard
@@ -19,16 +20,13 @@ def record_audio(output_file):
     Args:
         output_file
     """
+    record_seconds = 10
     chunk = 1024  # Record in chunks of 1024 samples
     sample_format = pyaudio.paInt16  # 16 bits per sample
     channels = 2
     fs = 44100  # Record at 44100 samples per second
     p = pyaudio.PyAudio()  # Create an interface to PortAudio
 
-    with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
-        listener.join()
-
-    print('Aufnahme läuft...')
     stream = p.open(format=sample_format,
                     channels=channels,
                     rate=fs,
@@ -37,12 +35,11 @@ def record_audio(output_file):
                     input_device_index=5)
     frames = []
 
-    while True:
-        if space_pressed:
-            data = stream.read(chunk)
-            frames.append(data)
-        else:
-            break
+    print('Aufnahme läuft...')
+
+    for _ in range(0, int(fs / chunk * record_seconds)):
+        data = stream.read(chunk)
+        frames.append(data)
 
     print('Aufnahme beendet')
     stream.stop_stream()

@@ -2,6 +2,10 @@ import io
 import sys
 from google.cloud import speech
 from llm import stream_chat_completion
+from gtts import gTTS
+import os
+from audio import record_audio
+from audio import list_audio_devices
 
 
 def main():
@@ -54,7 +58,10 @@ def main():
 
     # Create messages in OpenAI format
     messages = [
-        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "system", "content": "Du bist ein sarkastischer Assistent, du bist "
+                                      "hilfreich aber drückst gerne dein Missfallen aus. "
+                                      "Deine Antworten sind bestimmt für die Sprachausgabe, "
+                                      "also fasse dich kurz und verwende keine Emojis."},
         {"role": "user", "content": input}
     ]
 
@@ -73,6 +80,11 @@ def main():
     # - Text aus Output an Mimic3 oder gTTS übergeben
     # - Audiosignal erzeugen
     # - Audiosignal abspielen
+
+    tts = gTTS(output, lang="de")
+    tts.save('audio/output.mp3')
+
+    os.system('sox audio/output.mp3 -d')
 
 if __name__ == "__main__":
     main()
