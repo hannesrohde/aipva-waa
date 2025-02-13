@@ -3,6 +3,7 @@ import sys
 from google.cloud import speech
 from llm import stream_chat_completion
 
+
 def main():
     print("Welcome!")
 
@@ -10,6 +11,9 @@ def main():
     # - "push to talk" : Aufnahme während Leertaste gedrückt ist
     # - aufgenommenes Audio mittels whisper verarbeiten und Text erkennen
     # - Text in Variable input speichern
+
+    print('Die folgenden Audio-Devices stehen zur Verfügung')
+    list_audio_devices()
 
     print('Drücke und halte die Space-Taste, um mit mir zu reden!')
     audio_output_file = 'audio/input.wav'

@@ -2,6 +2,16 @@ import wave
 import pyaudio
 from pynput import keyboard
 
+def list_audio_devices():
+    """
+    Lists all audio devices available on the system.
+    """
+    p = pyaudio.PyAudio()
+    for i in range(p.get_device_count()):
+        info = p.get_device_info_by_index(i)
+        print(f"Device {i}: {info['name']}")
+    p.terminate()
+
 space_pressed = False
 
 def on_press(key):
@@ -16,6 +26,12 @@ def on_release(key):
         return False # stop listener
 
 def record_audio(output_file):
+    """
+    Records audio from the default input device until the space bar is released.
+
+    Args:
+        output_file
+    """
     chunk = 1024  # Record in chunks of 1024 samples
     sample_format = pyaudio.paInt16  # 16 bits per sample
     channels = 2
@@ -30,12 +46,16 @@ def record_audio(output_file):
                     channels=channels,
                     rate=fs,
                     frames_per_buffer=chunk,
-                    input=True)
+                    input=True,
+                    input_device_index=5)
     frames = []
 
-    while space_pressed:
-        data = stream.read(chunk)
-        frames.append(data)
+    while True:
+        if space_pressed:
+            data = stream.read(chunk)
+            frames.append(data)
+        else:
+            break
 
     print('Recording stopped')
     stream.stop_stream()
